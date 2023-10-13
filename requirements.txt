@@ -3,3 +3,4 @@ scikit-image==0.22.0
 streamlit==1.27.2
 opencv-python==4.8.1.78
 deepface==0.0.79
+libGL
