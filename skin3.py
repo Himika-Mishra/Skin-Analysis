@@ -52,6 +52,7 @@ mp_face_mesh = mp.solutions.face_mesh
 face_mesh = mp_face_mesh.FaceMesh()
 mp_drawing = mp.solutions.drawing_utils
 
+@st.cache
 def compute_lbp_texture(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     radius = 2
@@ -61,6 +62,7 @@ def compute_lbp_texture(image):
     lbp_hist = lbp_hist.astype('float')
     return np.sum(lbp_hist)
 
+@st.cache
 def draw_landmarks_with_flicker(image):
     results = face_mesh.process(image)
     landmarks_image = np.zeros_like(image, dtype=np.uint8)
@@ -90,7 +92,7 @@ def draw_landmarks_with_flicker(image):
     
     return blended_image
 
-
+@st.cache
 def count_wrinkles_and_spots(roi):
     gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
     bilateral = cv2.bilateralFilter(gray_roi, 9, 80, 80)
@@ -114,12 +116,13 @@ def count_wrinkles_and_spots(roi):
     
     return wrinkles, spots
 
-
+@st.cache
 def count_features(image):
     wrinkles, spots = count_wrinkles_and_spots(image)
     texture = compute_lbp_texture(image)
     return wrinkles, spots, texture
 
+@st.cache
 def process_image(uploaded_image):
     image = Image.open(uploaded_image).convert("RGB")
     frame = np.array(image)
