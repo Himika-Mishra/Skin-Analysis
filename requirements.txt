@@ -1,6 +1,6 @@
 # Your Python Dependencies
-opencv-python-headless
 mediapipe==0.10.7
 scikit-image==0.22.0
+opencv-python==4.8.1.78
 streamlit==1.27.2
 deepface==0.0.79
