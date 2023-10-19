@@ -303,7 +303,7 @@ footer_style = """
 """
 st.markdown(footer_style, unsafe_allow_html=True)
 
-@@st.cache_data
+@st.cache_data
 def image_to_base64(img_path):
     with open(img_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode()
