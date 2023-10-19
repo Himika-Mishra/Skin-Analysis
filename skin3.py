@@ -18,7 +18,7 @@ st.set_page_config(page_title="Face Analysis", page_icon=":smiley:")
 def load_image(img_path):
     return Image.open(img_path)
 
-st.sidebar.image(load_image("myskin.png"), width=200)  # You can adjust the width as desired.
+st.sidebar.image(load_image("myskin.png"), width=150)  # You can adjust the width as desired.
 
 # Navbar interaction using horizontal radio buttons in the sidebar
 action = st.sidebar.radio("--MENU--", ("Home", "Skin Analysis", "About Us"), key="navbar")  # Radio buttons for interaction in the sidebar
