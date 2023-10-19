@@ -13,6 +13,10 @@ import os
 # Streamlit settings and styles
 st.set_page_config(page_title="Face Analysis", page_icon=":smiley:")
 
+@st.cache
+def load_image(img_path):
+    return Image.open(img_path)
+
 st.sidebar.image(load_image("myskin.png"), width=200)  # You can adjust the width as desired.
 
 # Navbar interaction using horizontal radio buttons in the sidebar
