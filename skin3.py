@@ -13,7 +13,7 @@ import os
 # Streamlit settings and styles
 st.set_page_config(page_title="Face Analysis", page_icon=":smiley:")
 
-st.sidebar.image("https://github.com/Himika-Mishra/Skin-Analysis/blob/10dd6d2cbd0631433ef4f2575e4b24c5a5d1a705/myskin.png", width=200)  # You can adjust the width as desired.
+st.sidebar.image(load_image("myskin.png"), width=200)  # You can adjust the width as desired.
 
 # Navbar interaction using horizontal radio buttons in the sidebar
 action = st.sidebar.radio("--MENU--", ("Home", "Skin Analysis", "About Us"), key="navbar")  # Radio buttons for interaction in the sidebar
