@@ -9,6 +9,7 @@ from deepface import DeepFace
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image as tf_image
 import os
+import base64
 
 # Streamlit settings and styles
 st.set_page_config(page_title="Face Analysis", page_icon=":smiley:")
@@ -302,9 +303,14 @@ footer_style = """
 """
 st.markdown(footer_style, unsafe_allow_html=True)
 
-footer_content = """
+@st.cache
+def image_to_base64(img_path):
+    with open(img_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode()
+logo_base64 = image_to_base64("Hexis-Lab-Logo.png")
+footer_content = f"""
 <div class="footer">
-    <img src="Hexis-Lab-Logo.png" alt="Logo" class="footer-logo">
+    <img src="data:image/png;base64,{logo_base64}" alt="Logo" class="footer-logo">
     <span class="footer-text"><p>Validated by HexisLab Limited, The Biosphere, Draymans Way, Newcastle Helix, Newcastle, NE4 5BX | *Patent pending © 2023</p></span>
 </div>
 """
