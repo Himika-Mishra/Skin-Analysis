@@ -14,7 +14,7 @@ import base64
 # Streamlit settings and styles
 st.set_page_config(page_title="Face Analysis", page_icon=":smiley:")
 
-@st.cache
+@st.cache_data
 def load_image(img_path):
     return Image.open(img_path)
 
@@ -74,7 +74,7 @@ mp_drawing = mp.solutions.drawing_utils
 MODEL_PATH = 'more_data(3).h5'
 new_model = load_model(MODEL_PATH)
 
-@st.cache
+@st.cache_data
 def compute_lbp_texture(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     radius = 2
@@ -84,7 +84,7 @@ def compute_lbp_texture(image):
     lbp_hist = lbp_hist.astype('float')
     return np.sum(lbp_hist)
 
-@st.cache
+@st.cache_data
 def draw_landmarks_with_flicker(image):
     results = face_mesh.process(image)
     landmarks_image = np.zeros_like(image, dtype=np.uint8)
@@ -114,7 +114,7 @@ def draw_landmarks_with_flicker(image):
     
     return blended_image
 
-@st.cache
+@st.cache_data
 def count_wrinkles_and_spots(roi):
     gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
     bilateral = cv2.bilateralFilter(gray_roi, 9, 80, 80)
@@ -138,13 +138,13 @@ def count_wrinkles_and_spots(roi):
     
     return wrinkles, spots
 
-@st.cache
+@st.cache_data
 def count_features(image):
     wrinkles, spots = count_wrinkles_and_spots(image)
     texture = compute_lbp_texture(image)
     return wrinkles, spots, texture
 
-@st.cache
+@st.cache_data
 def process_image(uploaded_image):
     image = Image.open(uploaded_image).convert("RGB")
     frame = np.array(image)
@@ -156,7 +156,7 @@ def process_image(uploaded_image):
 
     return frame, wrinkles, spots, texture
 
-@st.cache
+@st.cache_data
 def loadImage(filepath):
     test_img = tf_image.load_img(filepath, target_size=(180, 180))
     test_img = tf_image.img_to_array(test_img)
@@ -164,7 +164,7 @@ def loadImage(filepath):
     test_img /= 255
     return test_img
 
-@st.cache
+@st.cache_data
 def model_predict(img_path):
     global new_model
     age_pred = new_model.predict(loadImage(img_path))
@@ -303,7 +303,7 @@ footer_style = """
 """
 st.markdown(footer_style, unsafe_allow_html=True)
 
-@st.cache
+@@st.cache_data
 def image_to_base64(img_path):
     with open(img_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode()
