@@ -295,7 +295,7 @@ footer_style = """
     font-style: italic;
 }
 .footer-logo {
-        width: auto; 
+        width: 100; 
         height: auto;
         margin-right: 10px;
     }
